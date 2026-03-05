@@ -1,0 +1,29 @@
+# Environments
+venv/
+env/
+.env
+
+# Node
+node_modules/
+package-lock.json
+
+# Cache
+__pycache__/
+.pytest_cache/
+.cypress_cache/
+
+# Results & Data
+results/
+data/
+cypress/screenshots/
+cypress/videos/
+*.json
+!package.json
+!cypress.json
+!config/*.json
+!agent_config.json
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store

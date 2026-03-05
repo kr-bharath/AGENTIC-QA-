@@ -1,0 +1,873 @@
+# 🤖 MASTER QA AGENT — Complete Project Documentation
+
+> **Enterprise-Grade Autonomous Automated Testing Framework**
+> Built with **Python**, **Cypress**, **AI/ML**, and **Streamlit**
+
+---
+
+## 📋 Table of Contents
+
+1. [Executive Summary](#1-executive-summary)
+2. [Architecture Overview](#2-architecture-overview)
+3. [Technology Stack](#3-technology-stack)
+4. [Pipeline Flow](#4-pipeline-flow)
+5. [Module 01 — DOM Crawler](#5-module-01--dom-crawler)
+6. [Module 02 — Scenario Generator](#6-module-02--scenario-generator)
+7. [Module 03 — Risk Engine](#7-module-03--risk-engine)
+8. [Module 04 — Test Code Generator](#8-module-04--test-code-generator)
+9. [Module 05 — Cypress Executor](#9-module-05--cypress-executor)
+10. [Module 06 — Flakiness Detector](#10-module-06--flakiness-detector)
+11. [Module 07 — API Anomaly Detector](#11-module-07--api-anomaly-detector)
+12. [Module 08 — Visual Regression](#12-module-08--visual-regression)
+13. [Module 09 — Self-Healing Engine](#13-module-09--self-healing-engine)
+14. [Module 10 — CI Failure Predictor](#14-module-10--ci-failure-predictor)
+15. [Module 11 — Regression Optimizer](#15-module-11--regression-optimizer)
+16. [Agent Orchestrator](#16-agent-orchestrator)
+17. [Approval Gate (HITL)](#17-approval-gate-hitl)
+18. [Cypress Configuration](#18-cypress-configuration)
+19. [Streamlit Dashboard](#19-streamlit-dashboard)
+20. [CI/CD Pipeline](#20-cicd-pipeline)
+21. [AI/ML Algorithms Used](#21-aiml-algorithms-used)
+22. [Use Cases for Automation Testers](#22-use-cases-for-automation-testers)
+23. [Insights & Output Analysis](#23-insights--output-analysis)
+24. [Design Patterns & Decisions](#24-design-patterns--decisions)
+
+---
+
+## 1. Executive Summary
+
+The **Master QA Agent** is an autonomous, AI-powered end-to-end testing framework that eliminates manual test script writing and maintenance. Unlike traditional test automation suites that rely on static, manually written scripts, this framework:
+
+- **Crawls** any live web application's DOM in real-time
+- **Generates** Cypress E2E test code dynamically
+- **Executes** tests with intelligent batching and retries
+- **Heals itself** when UI selectors break
+- **Detects flaky tests** using historical variance analysis
+- **Predicts failures** using Random Forest ML models
+- **Produces visual regression heatmaps** using Computer Vision (OpenCV + SSIM)
+- **Displays actionable analytics** via a Streamlit intelligence dashboard
+
+### Problem Solved
+
+In Agile/CI/CD environments, tests fail due to:
+- Changed CSS class names or IDs (brittle selectors)
+- Network latency causing timeouts
+- A/B testing layout changes
+- Unexpected popups/modals
+
+These "false negatives" are **Test Flakiness** — they erode developer trust in automation. This project **eliminates test flakiness and automation maintenance overhead completely**.
+
+### Real Outcome
+
+| Benefit | Description |
+|---------|-------------|
+| **Trustworthy CI/CD** | "Red" builds mean real bugs, not flaky scripts |
+| **Zero Maintenance** | Self-healing + auto code generation remove manual upkeep |
+| **Time Savings** | Batched concurrent execution cuts run time dramatically |
+| **Actionable Analytics** | Executive dashboard with GO/NO-GO deployment decisions |
+
+---
+
+## 2. Architecture Overview
+
+```mermaid
+graph TD
+    A["🌐 Target URL(s)"] --> B["Module 01: DOM Crawler<br/>(Cypress + JS)"]
+    B --> C["Module 02: Scenario Generator<br/>(Rule Engine + Integration Engine)"]
+    C --> D["🔘 Approval Gate<br/>(Human-in-the-Loop)"]
+    D --> E["Module 03: Risk Engine<br/>(Scorer + CI Predictor)"]
+    E --> F["Module 04: Test Code Generator<br/>(CypressBuilder)"]
+    F --> G["Module 11: Regression Optimizer<br/>(Smart Pruning)"]
+    G --> H["Module 05: Cypress Executor<br/>(Batched + Retry)"]
+    H --> I["Module 09: Self-Healing<br/>(Fallback Selector Learning)"]
+    I --> H
+    H --> J["Module 06: Flakiness Detector"]
+    H --> K["Module 07: API Anomaly Detector"]
+    H --> L["Module 08: Visual Regression<br/>(OpenCV + SSIM)"]
+    H --> M["Module 10: CI Predictor<br/>(Random Forest ML)"]
+    J --> N["📊 Streamlit Dashboard<br/>(7 Analytics Tabs)"]
+    K --> N
+    L --> N
+    M --> N
+```
+
+### Data Flow
+
+```
+URL Input → Cypress Crawler → DOM JSON → Rule Engine → Scenarios JSON
+    → Approval Gate → Risk Scoring → Cypress .cy.js Generation
+    → Batched Execution → Self-Healing Loop → Results JSON
+    → Flakiness + Anomaly + Visual Analysis → Dashboard
+```
+
+---
+
+## 3. Technology Stack
+
+### Core Languages & Frameworks
+
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **Python 3.10+** | Orchestrator, ML, Analytics | 3.10+ |
+| **Node.js 18+** | Cypress runtime | 18 LTS / 20 LTS |
+| **Cypress 15.11** | Browser automation & E2E testing | ^15.11.0 |
+| **Streamlit** | Interactive analytics dashboard | Latest |
+
+### Python Libraries
+
+| Library | Purpose |
+|---------|---------|
+| `scikit-learn` | Random Forest ML failure prediction |
+| `opencv-python` (cv2) | Visual regression pixel diffing |
+| `scikit-image` (ssim) | Structural Similarity Index calculation |
+| `pandas` | Data manipulation for dashboard |
+| `numpy` | Numerical operations for ML features |
+| `spacy` | NLP capabilities |
+| `streamlit` | Dashboard web application |
+| `requests` | HTTP operations |
+
+### Node.js Dependencies
+
+| Library | Purpose |
+|---------|---------|
+| `cypress` | E2E browser automation engine |
+| `axios` | HTTP client (dev dependency) |
+
+### Configuration Files
+
+| File | Role |
+|------|------|
+| [config/agent_config.json](file:///d:/Final%20Project/MASTER%20QA%20AGENT/config/agent_config.json) | Central configuration (timeouts, caps, healing toggles) |
+| [cypress.config.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress.config.js) | Cypress setup with custom event hooks |
+| [requirements.txt](file:///d:/Final%20Project/MASTER%20QA%20AGENT/requirements.txt) | Python dependency manifest |
+| [package.json](file:///d:/Final%20Project/MASTER%20QA%20AGENT/package.json) | Node.js dependency manifest |
+
+---
+
+## 4. Pipeline Flow
+
+The agent executes a **6-step pipeline**, orchestrated by [agent/agent_runner.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/agent/agent_runner.py):
+
+| Step | Module(s) | Description |
+|------|-----------|-------------|
+| **Step 1** | DOM Crawler (01) | Cypress visits URL, extracts interactive DOM elements |
+| **Step 2** | Scenario Generator (02) + Regression Optimizer (11) | Rule engine creates test scenarios; optimizer prunes stable ones |
+| **Step 3** | Risk Engine (03) + CI Predictor (10) | Scores & prioritizes tests by historical failure rate + ML prediction |
+| **Step 4** | Test Code Generator (04) | Generates [.cy.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress/e2e/crawler.cy.js) Cypress spec files from prioritized plan |
+| **Step 5** | Executor (05) + Self-Healer (09) | Runs tests with 3-retry loop; healer learns fallback selectors |
+| **Step 5.5** | Visual Regression (08) | Captures & compares screenshots with SSIM + OpenCV |
+| **Step 6** | Flakiness (06) + Anomaly (07) | Statistical analysis of pass/fail variance + execution time anomalies |
+
+---
+
+## 5. Module 01 — DOM Crawler
+
+> **Files:** [cypress/e2e/crawler.cy.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress/e2e/crawler.cy.js) + [modules/01_dom_crawler/dom_parser.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/01_dom_crawler/dom_parser.py)
+
+### Design
+
+The crawler is a **two-component system**: a Cypress spec that runs inside a real browser, and a Python parser that cleans the extracted data.
+
+### Cypress Crawler ([crawler.cy.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress/e2e/crawler.cy.js) — 238 lines)
+
+**5-Phase Extraction Pipeline:**
+
+| Phase | Purpose | Key Technique |
+|-------|---------|---------------|
+| **Phase 1** | Auto-dismiss cookie/GDPR banners | Multi-strategy: text matching (40+ consent phrases in 4 languages), OneTrust, CookieBot, Quantcast, TrustArc handlers |
+| **Phase 2** | Remove blocking overlays/modals/iframes | DOM removal of fixed/sticky/absolute positioned consent elements; restores `body.overflow` |
+| **Phase 3** | Detect bot protection (Cloudflare, CAPTCHA) | Text-based detection of 12+ bot indicators; flags output JSON |
+| **Phase 4** | Scroll & lazy-load trigger | `cy.scrollTo('bottom')` to force lazy-loaded elements |
+| **Phase 5** | Extract interactive elements | `querySelectorAll('input, button, a[href], select, textarea, form')` |
+
+**Key Functions:**
+- Spoofs `User-Agent` header to mimic real Chrome browser
+- Captures: tag, id, classes, type, name, href, text, visibility
+- Saves via `cy.task('saveDomData', ...)` to `data/{run_id}.json`
+
+### DOM Parser ([dom_parser.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/01_dom_crawler/dom_parser.py) — 64 lines)
+
+**Class:** [DOMParser](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/01_dom_crawler/dom_parser.py#5-56)
+
+| Method | Purpose |
+|--------|---------|
+| [parse_dom(filename)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/01_dom_crawler/dom_parser.py#10-56) | Loads JSON, filters bot artifacts, counts forms/buttons |
+
+**Key Logic:**
+- Filters hidden elements (`isVisible == False`)
+- Removes known bot-protection artifacts (cloudflare, turnstile, captcha, hcaptcha, recaptcha)
+- Returns structured dict: `{ url, interactive_elements, forms_found, buttons_found, bot_protection_detected }`
+
+---
+
+## 6. Module 02 — Scenario Generator
+
+> **Files:** [modules/02_scenario_generator/rule_engine.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/rule_engine.py) + [integration_engine.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/integration_engine.py)
+
+### Rule Engine ([rule_engine.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/rule_engine.py) — 248 lines)
+
+**Class:** [RuleEngine](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/rule_engine.py#6-244)
+
+Dynamically generates up to **70 test scenarios** across **6 tiers** from crawled DOM data.
+
+| Tier | Test IDs | Max Cap | What It Tests |
+|------|----------|---------|---------------|
+| **Tier 1: Form Validation** | `TC_FORM_POS_*`, `TC_FORM_NEG_*_EMPTY`, `TC_FORM_NEG_*_MALFORMED` | 30 | Positive submit, empty submit, SQL injection |
+| **Tier 2: Navigation** | `TC_NAV_*` | 15 | Anchor tag routing, SPA navigation |
+| **Tier 3: Interactivity** | `TC_INTERACT_*` | 10 | Button clicks, modal triggers, DOM mutations |
+| **Tier 4: Dropdowns** | `TC_SELECT_*` | 10 | `<select>` value change validation |
+| **Tier 5: Textareas** | `TC_TEXTAREA_*` | 5 | Multi-line input, special character handling |
+| **Tier 6: Accessibility** | `TC_A11Y_*` | 1 | Alt text, aria-labels, keyboard focusability |
+
+**Key Functions:**
+
+| Function | Purpose |
+|----------|---------|
+| [generate_scenarios(dom_data)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/rule_engine.py#11-237) | Creates scenario list from parsed DOM |
+| [save_scenarios(scenarios, run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/rule_engine.py#238-244) | Persists to `data/{run_id}_scenarios.json` |
+
+**Deduplication Logic:**
+- Forms: deduplicated by `selector_guess`
+- Navigation: deduplicated by both raw `href` AND resolved URL via `urljoin`
+- Filters out: `#` anchors, `mailto:`, `tel:`, `javascript:void`, social media links
+
+### Integration Engine ([integration_engine.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/integration_engine.py) — 73 lines)
+
+**Class:** [IntegrationEngine](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/integration_engine.py#5-69)
+
+Pre-defines **26 core test cases** for `automationexercise.com` (Register, Login, Cart, Checkout, etc.). Only injects if the target domain matches.
+
+| Function | Purpose |
+|----------|---------|
+| [inject_core_scenarios(existing, target_url)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/integration_engine.py#43-69) | Conditionally merges 26 core TCs; marks with `is_core: True` |
+
+---
+
+## 7. Module 03 — Risk Engine
+
+> **File:** [modules/03_risk_engine/scorer.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/03_risk_engine/scorer.py) — 124 lines
+
+**Class:** [RiskScorer](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/03_risk_engine/scorer.py#6-115)
+
+### Algorithm
+
+The risk score combines three weighted factors:
+
+```
+risk_score = base_score + (historical_failure_rate × 0.3) + (ml_failure_probability × 0.7)
+```
+
+| Factor | Source | Weight |
+|--------|--------|--------|
+| `base_score` | Priority (HIGH=0.8, MEDIUM=0.5, LOW=0.2) | Base |
+| `historical_failure_rate` | Real pass/fail ratio from ALL `*_results.json` files | 30% |
+| `ml_failure_probability` | Module 10 Random Forest prediction | 70% |
+
+### Risk Classification
+
+| Risk Score | Level | Execution Order |
+|-----------|-------|-----------------|
+| ≥ 0.8 | CRITICAL | 1 (runs first) |
+| ≥ 0.5 | MODERATE | 2 |
+| < 0.5 | LOW | 3 (runs last) |
+
+**Key Functions:**
+
+| Function | Purpose |
+|----------|---------|
+| [_build_historical_failure_map()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/03_risk_engine/scorer.py#14-40) | Scans ALL result files, builds `{test_id: {passed: N, failed: N}}` |
+| [_get_real_failure_rate(test_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/03_risk_engine/scorer.py#41-51) | Returns 0.0–1.0 failure rate; defaults to 0.10 for new tests |
+| [score_and_prioritize(run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/03_risk_engine/scorer.py#52-115) | Loads approved scenarios, scores, sorts, saves prioritized plan |
+
+---
+
+## 8. Module 04 — Test Code Generator
+
+> **File:** [modules/04_test_code_generator/cypress_builder.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py) — 340 lines
+
+**Class:** [CypressBuilder](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#7-330)
+
+### Design
+
+This is the **AST-like code builder** that programmatically generates valid [.cy.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress/e2e/crawler.cy.js) Cypress spec files. It doesn't use string templates — it constructs JavaScript code through conditional Python logic.
+
+### Test Type → Code Mapping
+
+| Strategy in Scenario | Generated Cypress Code |
+|---------------------|----------------------|
+| `Fill all inputs -> Submit` | Fills email/password/number/tel/text fields, textareas, dropdowns → submits → checks readyState + success indicators |
+| `Leave inputs blank -> Submit` | Submits empty form → verifies `.error`, `.invalid-feedback`, `:invalid` |
+| `Inject SQLi/NoSQL` | Types `' OR 1=1; --` into all inputs → submits → asserts no "Internal Server Error" or "SQL" in body |
+| `Click -> Wait for routing` | Clicks → verifies URL change or SPA content update |
+| `Wait for DOM mutation` | Counts `$('*').length` before/after click → logs DOM element diff |
+| `TC_A11Y` | Scans all `<img>` for alt text, all inputs for labels/aria-labels, checks `tabindex` |
+| `TC_SELECT` | Selects second `<option>` → verifies `.should('have.value', ...)` |
+| `TC_TEXTAREA` | Types multi-line + special chars → asserts non-empty value |
+
+**Key Functions:**
+
+| Function | Purpose |
+|----------|---------|
+| [_escape_selector(selector)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#25-34) | Escapes backticks and `${}` for safe template literal usage |
+| [_escape_describe_text(text)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#35-40) | Prevents syntax errors in [describe()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#35-40) / [it()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/02_scenario_generator/rule_engine.py#7-10) blocks |
+| [_get_timeout_for_test(test_id, strategy)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#41-51) | Context-aware timeouts: forms=15s, nav=10s, a11y=8s, default=7s |
+| [write_spec(scenario, filepath, run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#52-301) | Generates one complete [.cy.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress/e2e/crawler.cy.js) file |
+| [build_test_suite(run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/04_test_code_generator/cypress_builder.py#302-330) | Clears old specs, iterates prioritized plan, generates all specs |
+
+### Self-Healing Integration
+
+At construction time, the builder queries the [SelfHealer](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#6-157) memory bank. If a fallback selector exists, it creates a **robust multi-selector**:
+
+```javascript
+const robustSelector = `original_selector, healed_fallback_selector`;
+```
+
+### Visual Regression Anchor
+
+Every generated test ends with:
+```javascript
+cy.screenshot('{run_id}__{test_id}', { capture: 'viewport', overwrite: true });
+```
+
+---
+
+## 9. Module 05 — Cypress Executor
+
+> **File:** [modules/05_executor/run_tests.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/05_executor/run_tests.py) — 219 lines
+
+**Class:** [CypressExecutor](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/05_executor/run_tests.py#8-210)
+
+### Design
+
+Implements a **batched execution engine** with a **self-healing retry loop**.
+
+### Execution Flow
+
+```
+1. Load prioritized execution plan
+2. Map spec files to scenario metadata
+3. FOR attempt = 1 to 3 (max_retries):
+   a. Clean up old status JSON files
+   b. Join all pending specs into comma-separated --spec arg
+   c. Run: npx cypress run --spec "spec1.js,spec2.js,..."
+   d. FOR each spec:
+      - Read {spec}_status.json (written by cypress.config.js after:spec hook)
+      - If passed on attempt > 1 → mark as FLAKY
+      - If failed AND not SYNTAX_ERROR → trigger Self-Healer → rewrite spec → add to retry list
+4. Compile final results JSON
+```
+
+### Smart Retry Logic
+
+| Condition | Action |
+|-----------|--------|
+| Failed + duration=0 + SYNTAX_ERROR | **Skip retry** (code gen crash won't fix itself) |
+| Failed + has selector | Trigger `SelfHealer.register_failure()` → regenerate spec → retry |
+| Passed on attempt > 1 | Mark `flaky: true` |
+
+### Output Contract
+
+Writes `results/{run_id}_results.json`:
+```json
+{
+  "run_id": "run_20260304_162750",
+  "target_url": "https://example.com",
+  "timestamp": "2026-03-04T16:27:50",
+  "tests": [{ "test_id", "status", "flaky", "attempts", "execution_time_ms", "error_message", "error_type" }],
+  "summary": { "total", "passed", "failed", "execution_time_sec", "status" }
+}
+```
+
+---
+
+## 10. Module 06 — Flakiness Detector
+
+> **File:** [modules/06_flakiness_detector/flakiness.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/06_flakiness_detector/flakiness.py) — 91 lines
+
+**Class:** [FlakinessDetector](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/06_flakiness_detector/flakiness.py#7-87)
+
+### Algorithm
+
+**Flip-Rate Flakiness Score:**
+
+```
+flakiness_score = number_of_state_flips / (total_runs - 1)
+```
+
+- A test is **flaky** if it has both passed AND failed across historical runs
+- Score of **1.0** = perfectly flaky (alternates pass/fail every run)
+- Score of **0.0** = perfectly stable
+- Requires minimum **3 historical runs** to activate
+
+| Function | Purpose |
+|----------|---------|
+| [_get_all_historical_results()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/06_flakiness_detector/flakiness.py#16-26) | Loads all `*_results.json` sorted oldest→newest |
+| [calculate_flakiness()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/06_flakiness_detector/flakiness.py#27-87) | Computes flip-rate per test_id, saves [flakiness_report.json](file:///d:/Final%20Project/MASTER%20QA%20AGENT/results/flakiness_report.json) |
+
+---
+
+## 11. Module 07 — API Anomaly Detector
+
+> **File:** [modules/07_api_anomaly_detector/anomaly.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/07_api_anomaly_detector/anomaly.py) — 155 lines
+
+**Class:** [APIAnomalyDetector](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/07_api_anomaly_detector/anomaly.py#6-145)
+
+### Algorithm — Statistical Z-Score Analysis
+
+Computes **mean** and **standard deviation** of execution times per module across ALL historical runs, then flags current-run tests that deviate.
+
+### 4 Anomaly Types
+
+| Type | Detection Logic |
+|------|----------------|
+| **Execution Time Spike** | Z-score > 2.0 above historical mean for the module |
+| **Zero-Duration Failure** | `duration == 0` AND `status == failed` → crash/syntax error |
+| **Multi-Retry Failure** | `attempts >= 2` AND `status == failed` → persistent instability |
+| **Flaky Recovery** | `attempts >= 2` AND `status == passed` → intermittent issue |
+
+**Key Functions:**
+
+| Function | Purpose |
+|----------|---------|
+| [_compute_historical_baseline()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/07_api_anomaly_detector/anomaly.py#17-46) | Builds `{module: {mean, std_dev}}` from all results |
+| [analyze_api_responses(run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/07_api_anomaly_detector/anomaly.py#47-145) | Runs 4-type anomaly detection, saves `{run_id}_anomalies.json` |
+
+---
+
+## 12. Module 08 — Visual Regression
+
+> **File:** [modules/08_visual_regression/comparator.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/08_visual_regression/comparator.py) — 136 lines
+
+**Class:** [VisualComparator](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/08_visual_regression/comparator.py#10-128)
+
+### Computer Vision Pipeline
+
+Uses **OpenCV** and **scikit-image SSIM** for pixel-level UI comparison.
+
+```
+1. Glob all .png screenshots from cypress/screenshots/
+2. Map each to a canonical test_id (handle both anchored and failed screenshots)
+3. If no baseline exists → set current as baseline
+4. If baseline exists:
+   a. Resize to match dimensions
+   b. Convert to grayscale
+   c. Compute SSIM (Structural Similarity Index)
+   d. If SSIM < 0.999 → threshold → find contours → draw RED bounding boxes → save diff heatmap
+```
+
+### Key Libraries Used
+
+| Library | Function | Purpose |
+|---------|----------|---------|
+| `cv2.imread` | Load images | Read baseline & current screenshots |
+| `cv2.cvtColor` | Color conversion | BGR → Grayscale for comparison |
+| `cv2.resize` | Dimension normalization | Handle viewport size differences |
+| `cv2.threshold` | Binary thresholding | Create diff mask with Otsu's method |
+| `cv2.findContours` | Contour detection | Identify changed regions |
+| `cv2.rectangle` | Bounding boxes | Draw RED rectangles over changes |
+| `ssim()` | Structural Similarity | 0.0–1.0 similarity score |
+
+### Threshold
+
+- **< 0.999 SSIM** = Visual anomaly detected (extremely strict — catches even minor pixel shifts)
+- Contours smaller than 5×5 pixels are filtered as noise
+
+---
+
+## 13. Module 09 — Self-Healing Engine
+
+> **File:** [modules/09_self_healing/healer.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py) — 158 lines
+
+**Class:** [SelfHealer](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#6-157)
+
+### 4-Strategy Healing Cascade
+
+When a selector fails, the healer tries four strategies in order:
+
+| Strategy | Name | Logic | Example |
+|----------|------|-------|---------|
+| **1** | DOM Snapshot Lookup | Searches crawled DOM for alternative visible elements of same tag type | `form[name='search']` |
+| **2** | Attribute-Based Fallback | If original used `.class` or `#id`, tries `[name]`, `[data-testid]`, `[aria-label]` | `form[name], form[data-testid]` |
+| **3** | Tag + Visibility Fallback | Uses `:visible:first` pseudo-selector | `button:visible:first` |
+| **4** | Generic Last Resort | Matches any visible element | `*:visible:first` |
+
+### Memory Bank
+
+All learned fallbacks are persisted to [data/healed_selectors.json](file:///d:/Final%20Project/MASTER%20QA%20AGENT/data/healed_selectors.json):
+```json
+{
+  "form#old-id.old-class": {
+    "fallback": "form[name='search']",
+    "strategy": "dom_lookup",
+    "healed": true
+  }
+}
+```
+
+**Key Functions:**
+
+| Function | Purpose |
+|----------|---------|
+| [get_fallback(selector)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#16-27) | Query memory bank for known healing |
+| [register_failure(selector, test_id, run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#80-132) | Execute 4-strategy cascade, persist result |
+| [_search_dom_snapshot(selector, run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#34-79) | Strategy 1: cross-reference DOM JSON files |
+| [_extract_tag_from_selector(selector)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#28-33) | Regex extract base tag name |
+| [get_healing_summary()](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/09_self_healing/healer.py#149-157) | Returns all healings for dashboard display |
+
+---
+
+## 14. Module 10 — CI Failure Predictor
+
+> **File:** [modules/10_ci_predictor/predictor.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/10_ci_predictor/predictor.py) — 80 lines
+
+**Class:** [FailurePredictor](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/10_ci_predictor/predictor.py#7-80)
+
+### ML Algorithm: Random Forest Classifier
+
+| Aspect | Detail |
+|--------|--------|
+| **Algorithm** | `sklearn.ensemble.RandomForestClassifier` |
+| **Estimators** | 10 trees |
+| **Training Data** | ALL historical `*_results.json` test outcomes |
+| **Minimum Training Size** | 10+ samples with at least 1 failure |
+| **Output** | `failure_probability` (0.0 to 1.0) per scenario |
+
+### Feature Vector (4 dimensions)
+
+| Feature | Extraction Logic |
+|---------|-----------------|
+| `priority_score` | HIGH=3, MEDIUM=2, LOW=1 |
+| `selector_complexity` | `len(selector_used)` — longer selectors are more fragile |
+| `is_form` | 1 if "form" in selector, else 0 |
+| `has_interaction` | 1 if "mutation" in strategy, else 0 |
+
+### Fallback Heuristic
+
+If `scikit-learn` is unavailable or training data is sparse:
+```python
+base_prob = 0.15 if is_form else 0.02
+base_prob += selector_complexity * 0.001
+```
+
+---
+
+## 15. Module 11 — Regression Optimizer
+
+> **File:** [modules/11_regression_optimizer/optimizer.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/11_regression_optimizer/optimizer.py) — 98 lines
+
+**Class:** [RegressionOptimizer](file:///d:/Final%20Project/MASTER%20QA%20AGENT/modules/11_regression_optimizer/optimizer.py#5-97)
+
+### Deterministic Pruning Algorithm
+
+Analyzes the **3 most recent** historical runs to identify "deeply stable" modules (zero failures, 5+ passes).
+
+| Priority | Deeply Stable Module | Action |
+|----------|---------------------|--------|
+| **HIGH** | Any | **NEVER pruned** |
+| **MEDIUM** | Yes | Keep every 3rd test as canary |
+| **LOW** | Yes | **Prune entirely** |
+| Any | No (has recent failures) | **Keep** |
+
+> **Key Design Decision:** Uses a deterministic counter (`medium_counter % 3`) instead of `random.random()` for CI/CD reproducibility.
+
+---
+
+## 16. Agent Orchestrator
+
+> **File:** [agent/agent_runner.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/agent/agent_runner.py) — 441 lines
+
+### Two Execution Modes
+
+| Mode | CLI Flag | Behavior |
+|------|----------|----------|
+| **Single URL** | `--url "https://..."` | Crawls one URL → one run |
+| **Multi-URL Swarm** | `--urls "url1,url2,url3"` | Crawls N URLs sequentially → ONE unified run with all scenarios combined |
+
+### Key CLI Arguments
+
+| Argument | Purpose |
+|----------|---------|
+| `--url` | Single target URL |
+| `--urls` | Comma-separated multiple URLs |
+| `--auto-approve` | Bypass human-in-the-loop approval |
+| `--max-scenarios` | Limit auto-approved scenario count |
+
+### Multi-URL Deduplication
+
+When crawling multiple URLs, duplicate `test_id` values get suffixed: `TC_FORM_POS_1` → `TC_FORM_POS_1_v2`.
+
+---
+
+## 17. Approval Gate (HITL)
+
+> **File:** [agent/approval_gate.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/agent/approval_gate.py) — 43 lines
+
+**Class:** [ApprovalGate](file:///d:/Final%20Project/MASTER%20QA%20AGENT/agent/approval_gate.py#5-43)
+
+Implements **Human-in-the-Loop** control. The pipeline halts after scenario generation and waits (up to 900 seconds) for approval.
+
+| Function | Purpose |
+|----------|---------|
+| [get_pending_scenarios(run_id)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/agent/approval_gate.py#34-43) | Load scenarios for dashboard display |
+| [save_approved(run_id, approved_test_ids)](file:///d:/Final%20Project/MASTER%20QA%20AGENT/agent/approval_gate.py#10-33) | Filter & save approved subset to `{run_id}_approved.json` |
+
+---
+
+## 18. Cypress Configuration
+
+> **File:** [cypress.config.js](file:///d:/Final%20Project/MASTER%20QA%20AGENT/cypress.config.js) — 100 lines
+
+### Custom Event Hooks
+
+| Hook | Purpose |
+|------|---------|
+| `before:browser:launch` | Removes `--enable-automation` flag, adds `--disable-blink-features=AutomationControlled` to bypass bot detection |
+| `after:spec` | Writes per-spec status JSON with **error classification** |
+| `task.saveDomData` | Writes DOM extraction JSON to disk |
+
+### Error Classification Engine
+
+The `after:spec` hook classifies errors into 7 categories:
+
+| Error Type | Detection Pattern |
+|-----------|------------------|
+| `TIMEOUT` | "timeout", "timed out" |
+| `ELEMENT_NOT_FOUND` | "not found", "could not find" |
+| `DETACHED_DOM` | "detached", "stale" |
+| `ASSERTION_FAILURE` | "assert", "expected" |
+| `SYNTAX_ERROR` | "syntax", "unexpected token" |
+| `NAVIGATION_FAILURE` | "navigation", "url" |
+| `UNKNOWN` | Everything else |
+
+---
+
+## 19. Streamlit Dashboard
+
+> **File:** [dashboard/app.py](file:///d:/Final%20Project/MASTER%20QA%20AGENT/dashboard/app.py) — 842 lines
+
+### Premium Design
+
+- **Glassmorphism** dark theme with CSS custom properties
+- **Google Fonts**: Inter (body) + Outfit (headings)
+- Custom scrollbar, hover transitions, gradient hero section
+
+### 7 Analytics Tabs
+
+| Tab | Content |
+|-----|---------|
+| **🔘 Approval Gate** | Interactive checkbox form for scenario selection; priority filters; grouped by source URL |
+| **📜 Execution History** | Color-coded pass/fail DataFrame of all test results |
+| **⚡ Risk & Flakiness** | Historical flakiness analysis table with flip-rate scores |
+| **🖼️ Visual Diffs** | Side-by-side baseline vs current vs diff heatmap images |
+| **🧠 AI Insights** | API anomaly table + Self-healing diagnostics + Regression predictor status |
+| **🌐 Swarm Comparison** | Cross-site reliability matrix, bar charts, pass-rate variance |
+| **🔍 Root Cause Analyzer** | Per-failure expandable cards with real Cypress errors, heuristic diagnosis, stack traces |
+
+### Neural Decision Engine
+
+Displays a prominent **GO / NO-GO** deployment recommendation:
+- ✅ **GO — PRODUCTION READY** if all tests passed
+- 🛑 **NO-GO — BLOCK DEPLOYMENT** if any test failed
+
+### Regression Trend Chart
+
+Line chart tracking `passed` vs `failed` counts across the last 10 runs using `st.line_chart()`.
+
+---
+
+## 20. CI/CD Pipeline
+
+> **File:** [.github/workflows/qa-agent-ci.yml](file:///d:/Final%20Project/MASTER%20QA%20AGENT/.github/workflows/qa-agent-ci.yml) — 87 lines
+
+### Triggers
+
+| Trigger | Condition |
+|---------|-----------|
+| Push | `main` or `develop` branches |
+| Pull Request | Against `main` |
+| Schedule | Nightly at midnight UTC (`0 0 * * *`) |
+| Manual Dispatch | Custom URL + auto-approve toggle |
+
+### Pipeline Steps
+
+1. **Checkout** → `actions/checkout@v3`
+2. **Setup Node.js 18** → `actions/setup-node@v3`
+3. **Setup Python 3.10** → `actions/setup-python@v4`
+4. **Install Python deps** + spaCy model
+5. **Install npm deps** (Cypress)
+6. **Run agent** in background → auto-approve if CI mode
+7. **Upload artifacts** (results, visual diffs, approvals) with 7-day retention
+
+---
+
+## 21. AI/ML Algorithms Used
+
+| Algorithm | Module | Library | Purpose |
+|-----------|--------|---------|---------|
+| **Random Forest Classifier** | 10 (CI Predictor) | scikit-learn | Predict failure probability from feature vectors |
+| **SSIM (Structural Similarity Index)** | 08 (Visual Regression) | scikit-image | Pixel-level UI comparison |
+| **Z-Score Statistical Analysis** | 07 (Anomaly Detector) | Pure Python | Detect execution time spikes |
+| **Flip-Rate Variance** | 06 (Flakiness) | Pure Python | Measure test stability over time |
+| **Weighted Multi-Factor Risk Scoring** | 03 (Risk Engine) | Pure Python | Prioritize test execution order |
+| **4-Strategy Healing Cascade** | 09 (Self-Healer) | Pure Python | Intelligent selector recovery |
+| **Deterministic Canary Pruning** | 11 (Regression Optimizer) | Pure Python | Reduce test suite size safely |
+| **Otsu's Thresholding** | 08 (Visual Regression) | OpenCV | Binary diff mask generation |
+| **Contour Detection** | 08 (Visual Regression) | OpenCV | Identify changed UI regions |
+
+---
+
+## 22. Use Cases for Automation Testers
+
+### 1. Rapid Test Suite Bootstrap
+**Scenario:** QA team receives a new web application.
+**Action:** Point the agent at any URL → get 30-70 Cypress tests in minutes.
+**Value:** Eliminates weeks of manual test script writing.
+
+### 2. Regression Testing After UI Changes
+**Scenario:** Developer changes CSS classes or element IDs.
+**Action:** Self-healer detects broken selectors → learns fallback → retries automatically.
+**Value:** Zero manual maintenance when UI code changes.
+
+### 3. Security Vulnerability Scanning
+**Scenario:** Need to verify SQL injection protection.
+**Action:** Every detected form gets a `TC_FORM_NEG_*_MALFORMED` test injecting `' OR 1=1; --`.
+**Value:** Automated security audit of all input surfaces.
+
+### 4. Accessibility Compliance
+**Scenario:** Must verify WCAG compliance.
+**Action:** `TC_A11Y` tests check alt text, aria-labels, keyboard focusability.
+**Value:** Automated accessibility scanning on every run.
+
+### 5. Multi-Site Benchmarking
+**Scenario:** Compare quality across staging/production or multiple microservices.
+**Action:** `--urls` mode crawls all sites → Swarm Comparison tab shows reliability matrix.
+**Value:** Executive-level quality visibility across the entire portfolio.
+
+### 6. CI/CD Gate
+**Scenario:** Block deployments with failing tests.
+**Action:** GitHub Actions runs nightly → GO/NO-GO recommendation.
+**Value:** Zero-configuration quality gate in the deployment pipeline.
+
+### 7. Visual Regression During Redesigns
+**Scenario:** Track unintended UI changes during a redesign.
+**Action:** Screenshots compared with 99.9% SSIM threshold → red bounding boxes highlight differences.
+**Value:** Pixel-perfect visual quality assurance.
+
+### 8. Flakiness Root Cause Investigation
+**Scenario:** Tests pass/fail randomly, eroding team trust.
+**Action:** Flakiness detector computes flip-rate scores → Root Cause Analyzer shows real Cypress errors.
+**Value:** Targeted debugging instead of guessing.
+
+---
+
+## 23. Insights & Output Analysis
+
+### Output Files Generated Per Run
+
+| File | Contents | Consumer |
+|------|----------|----------|
+| `data/{run_id}.json` | Raw DOM extraction (elements, URLs, visibility) | Scenario Generator |
+| `data/{run_id}_scenarios.json` | Generated test scenarios with strategies | Approval Gate |
+| `data/{run_id}_approved.json` | Approved subset for execution | Risk Engine |
+| `data/{run_id}_prioritized.json` | Risk-scored & sorted execution plan | Code Generator |
+| `results/{run_id}_results.json` | Full test execution results with timing | Dashboard, All analytics |
+| `results/{run_id}_anomalies.json` | Statistical anomaly detections | Dashboard AI Insights |
+| `results/{run_id}_visual_regression.json` | SSIM scores + diff paths | Dashboard Visual Diffs |
+| [results/flakiness_report.json](file:///d:/Final%20Project/MASTER%20QA%20AGENT/results/flakiness_report.json) | Cross-run stability analysis | Dashboard Risk & Flakiness |
+| [data/healed_selectors.json](file:///d:/Final%20Project/MASTER%20QA%20AGENT/data/healed_selectors.json) | Persistent selector memory bank | Code Generator (next run) |
+
+### How to Use the Output
+
+1. **GO/NO-GO Decision:** The dashboard's Neural Decision Engine provides an instant deployment recommendation
+2. **Bug Triage:** Root Cause Analyzer shows exact Cypress error messages + stack traces for each failure
+3. **Technical Debt:** Flakiness scores identify which tests need architectural attention
+4. **Performance Monitoring:** Anomaly detector flags execution time regressions
+5. **UI Quality:** Visual regression heatmaps show exactly which pixels changed and where
+6. **Cross-Site Quality:** Swarm comparison reveals which properties are stable vs unstable
+
+---
+
+## 24. Design Patterns & Decisions
+
+### Architectural Patterns
+
+| Pattern | Where Used | Why |
+|---------|-----------|-----|
+| **Pipeline / Chain of Responsibility** | Agent Orchestrator | Each module processes data and passes to next |
+| **Strategy Pattern** | Self-Healer (4 strategies) | Cascading fallback with increasing generality |
+| **Observer / Event Hook** | Cypress `after:spec` | Decoupled error capture from test execution |
+| **Memory Bank / Cache** | Healed selectors JSON | Persistent learning across runs |
+| **Human-in-the-Loop** | Approval Gate | Safety control before test execution |
+| **Shared Data Contract** | JSON files in data/results | Loosely coupled modules communicate via filesystem |
+
+### Key Design Decisions
+
+1. **JSON over Database:** All inter-module communication uses JSON files. This makes the system portable, debuggable, and requires no database setup.
+
+2. **Dynamic Import (`importlib`):** Modules are imported at runtime to avoid circular dependencies and allow graceful degradation if a module is unavailable.
+
+3. **Deterministic over Random:** The Regression Optimizer uses counter-based pruning instead of `random.random()` for CI/CD reproducibility.
+
+4. **Multi-Selector Robustness:** Instead of replacing a failed selector, the builder generates `selector1, selector2` — jQuery/Cypress will match whichever exists.
+
+5. **Graceful Degradation:** Every module has try/except wrapping. If ML libraries aren't installed, heuristic fallbacks activate. If visual regression fails, the pipeline continues.
+
+6. **Bot Protection Awareness:** The crawler detects Cloudflare/CAPTCHA walls and flags the extraction as possibly limited, rather than crashing.
+
+---
+
+
+## 25.  Data Retention Policy — Implemented
+3 Files Changed
+File	Change
+
+agent/cleanup_old_runs.py
+NEW — Full garbage collector with time + count limits
+
+config/agent_config.json
+Added data_retention section with configurable limits
+
+agent/agent_runner.py
+Wired cleanup as STEP 7 at the end of both single-URL and multi-URL pipelines
+How It Now Works
+The pipeline now has a 7th step that runs automatically at the end of every successful execution:
+
+STEP 1: DOM Crawler → STEP 2: Scenarios → STEP 3: Risk → STEP 4: Code Gen
+→ STEP 5: Executor → STEP 6: Analytics → STEP 7: 🗑️ Garbage Collector (NEW)
+Two Independent Limits
+Limit	Default	What It Does
+Time-Based	30 days	Any run_* files older than 30 days are deleted
+Count-Based	50 runs	If you have 51+ runs, the oldest ones are purged
+A run is deleted if it violates either limit.
+
+What Gets Cleaned vs Protected
+✅ Cleaned	❌ Never Touched
+data/run_* (DOM, scenarios, approved, prioritized)	
+
+data/healed_selectors.json
+ (healing memory)
+results/run_* (results, anomalies, visual regression)	data/screenshots/baseline/* (visual golden masters)
+cypress/screenshots/run_* (execution screenshots)	
+
+results/flakiness_report.json
+ (regenerated each run)
+data/screenshots/diffs/run_* (old diff heatmaps)	
+
+config/agent_config.json
+ (your settings)
+Configurable in 
+
+agent_config.json
+json
+"data_retention": {
+    "retention_days": 30,
+    "max_runs": 50,
+    "enable_auto_cleanup": true   // set to false to disable
+}
+Can Also Run Standalone with Dry-Run
+
+
+> **Document Generated:** March 5, 2026
+> **Project:** MASTER QA AGENT v2.5 — Enterprise Edition
+> **Total Source Files Analyzed:** 15 Python + 2 JavaScript + 3 Config + 1 YAML = **21 files**
+> **Total Lines of Code:** ~2,900+ lines across all modules

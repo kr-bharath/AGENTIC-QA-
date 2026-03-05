@@ -1,0 +1,45 @@
+{
+    "target_url": "https://www.amazon.com",
+    "crawler": {
+        "timeout_ms": 30000,
+        "viewport_width": 1280,
+        "viewport_height": 720,
+        "skip_external_links": true,
+        "filter_social_links": true,
+        "filter_hidden_inputs": true
+    },
+    "scenario_generation": {
+        "max_nav_scenarios": 15,
+        "max_form_scenarios": 30,
+        "max_interaction_scenarios": 10,
+        "max_select_scenarios": 10,
+        "max_textarea_scenarios": 5,
+        "enable_accessibility_tests": true,
+        "enable_security_tests": true,
+        "deduplicate_by_url": true
+    },
+    "execution": {
+        "max_retries": 3,
+        "default_timeout_ms": 10000,
+        "form_timeout_ms": 15000,
+        "nav_timeout_ms": 10000,
+        "skip_retry_on_syntax_error": true
+    },
+    "optimization": {
+        "min_stable_history": 5,
+        "prune_stable_low_priority": true,
+        "prune_stable_medium_canary_ratio": 3
+    },
+    "self_healing": {
+        "enable_dom_lookup": true,
+        "enable_attribute_fallback": true,
+        "enable_visibility_fallback": true
+    },
+    "data_retention": {
+        "retention_days": 30,
+        "max_runs": 50,
+        "enable_auto_cleanup": true
+    },
+    "results_dir": "./results",
+    "data_dir": "./data"
+}

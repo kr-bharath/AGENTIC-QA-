@@ -1,0 +1,86 @@
+name: AI QA Agent Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # Run a nightly full test suite automatically at midnight UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "URL to run tests against"
+        required: false
+        default: "https://automationexercise.com"
+      auto_approve_scenarios:
+        description: "Auto-approve top 10 generated scenarios"
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  run-qa-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js (Cypress Requirement)
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m spacy download en_core_web_sm
+
+      - name: Install Cypress & Node Dependencies
+        run: |
+          npm install
+
+      - name: Run Orchestrator Pipeline (Headless Execution)
+        run: |
+          # The agent runner pauses for human approval. We can run it in the background
+          # and fire an auto-approval script to make it fully CI/CD headless.
+
+          # Target URL override if manually triggered
+          URL="${{ github.event.inputs.target_url || 'https://automationexercise.com' }}"
+
+          echo "Starting Agent Orchestrator in the background..."
+          python agent/agent_runner.py --url "$URL" &
+          AGENT_PID=$!
+
+          echo "Waiting for Scenario generation..."
+          sleep 45  # Give it time to crawl and generate DOM JSON
+
+          if [[ "${{ github.event.inputs.auto_approve_scenarios }}" == "true" || "${{ github.event_name }}" == "push" || "${{ github.event_name }}" == "schedule" ]]; then
+            echo "CI Mode: Triggering Headless Auto-Approval..."
+            python auto_approve.py &
+          fi
+
+          echo "Waiting for test execution to complete..."
+          wait $AGENT_PID
+
+      - name: Upload Artifacts (Results, Visual Diffs, Heatmaps)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: qa-agent-results
+          path: |
+            results/
+            data/screenshots/diffs/
+            data/*_approved.json
+          retention-days: 7
